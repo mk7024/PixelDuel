@@ -23,6 +23,8 @@ public class Duel extends JavaPlugin {
     @Override
     public void onEnable(){
         plugin = this;
+        gameManager = new GameManager();
+        playerManager = new PlayerManager();
         saveDefaultConfig();
         ConfigurationSection config = this.getConfig().getConfigurationSection("Game");
         if(config != null){
