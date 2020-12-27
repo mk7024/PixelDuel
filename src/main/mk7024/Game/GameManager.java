@@ -41,7 +41,7 @@ public class GameManager {
     public Game getAvailableGame(){
         int i = 0;
         for(Game game : allgame){
-            if(GameState.canJoin(game.getGameState())){
+            if(GameState.canJoin(game)){
                 return game;
             }
         }
