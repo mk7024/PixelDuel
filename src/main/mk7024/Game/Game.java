@@ -22,18 +22,30 @@ public class Game {
     public Game(String name){
         this.name = name;
         w = Bukkit.getWorld(name);
-        gameState = GameState.INLOBBY;
+        this.gameState = GameState.INLOBBY;
         duel = Duel.getPlugin();
         location1 = new Location(w,duel.getConfig().getDouble("Game." + name + ".spawnlocation.x1"),duel.getConfig().getDouble("Game." + name + ".spawnlocation.y1"),duel.getConfig().getDouble("Game." + name + ".spawnlocation.z1"));
-        location1 = new Location(w,duel.getConfig().getDouble("Game." + name + ".spawnlocation.x2"),duel.getConfig().getDouble("Game." + name + ".spawnlocation.y2"),duel.getConfig().getDouble("Game." + name + ".spawnlocation.z2"));
+        location2 = new Location(w,duel.getConfig().getDouble("Game." + name + ".spawnlocation.x2"),duel.getConfig().getDouble("Game." + name + ".spawnlocation.y2"),duel.getConfig().getDouble("Game." + name + ".spawnlocation.z2"));
+    }
+
+    public HashSet<UUID> getPlayer() {
+        return player;
     }
 
     public GameState getGameState(){
         return gameState;
     }
 
+    public void setInGame(){
+        gameState = GameState.INGAME;
+    }
+
     public void addPlayer(Player p){
         player.add(p.getUniqueId());
+    }
+
+    public void removePlayer(Player p){
+        player.remove(p.getUniqueId());
     }
 
     public void removeAllPlayer(){

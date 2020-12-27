@@ -2,8 +2,11 @@ package main.mk7024;
 
 import main.mk7024.Game.Game;
 import main.mk7024.Game.GameManager;
+import main.mk7024.Listener.PlayerJoin;
+import main.mk7024.Listener.PlayerQuit;
 import main.mk7024.Player.PlayerManager;
 import main.mk7024.Task.CheckingQueue;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -33,6 +36,8 @@ public class Duel extends JavaPlugin {
             this.getLogger().info("未加载游戏");
         }
         getCommand("queue").setExecutor(new main.mk7024.Command.queue());
+        Bukkit.getPluginManager().registerEvents(new PlayerJoin(),this);
+        Bukkit.getPluginManager().registerEvents(new PlayerQuit(),this);
     }
 
     @Override
