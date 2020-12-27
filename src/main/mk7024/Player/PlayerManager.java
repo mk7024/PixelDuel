@@ -20,4 +20,7 @@ public class PlayerManager {
     public void removePlayer(Player player){
         allplayer.remove(player.getUniqueId());
     }
+    public PlayerState getState(Player player){
+        return allplayer.get(player.getUniqueId());
+    }
 }

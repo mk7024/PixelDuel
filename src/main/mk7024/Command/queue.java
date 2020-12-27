@@ -20,7 +20,7 @@ public class queue implements CommandExecutor {
         }
         Player player = (Player) sender;
         if(command.getName().equalsIgnoreCase("queue")){
-            if(!PlayerState.canJoin(Duel.getPlayerManager().getOnlineplayer().get(player.getUniqueId()))){
+            if(!PlayerState.canJoin(Duel.getPlayerManager().getState(player))){
                 player.sendMessage(ChatColor.RED + "你已经加入游戏了!");
                 return true;
             }

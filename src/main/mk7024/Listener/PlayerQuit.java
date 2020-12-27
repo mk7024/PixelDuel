@@ -20,7 +20,7 @@ public class PlayerQuit implements Listener {
         Duel.getPlayerManager().removePlayer(player);
 
         //TODO:对战中退出
-        if(!PlayerState.canJoin(Duel.getPlayerManager().getOnlineplayer().get(player))){
+        if(!PlayerState.canJoin(Duel.getPlayerManager().getState(player))){
             Game game = Duel.getGameManager().getPlayerInWhichGame(player);
             game.removePlayer(player);
         }
