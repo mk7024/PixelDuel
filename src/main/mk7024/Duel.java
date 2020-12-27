@@ -11,12 +11,8 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class Duel extends JavaPlugin {
     private static Duel plugin;
-    private Set<Game> games = new HashSet<>();
     private static GameManager gameManager;
     private static PlayerManager playerManager;
 
