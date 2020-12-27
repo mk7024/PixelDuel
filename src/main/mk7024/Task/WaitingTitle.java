@@ -1,5 +1,7 @@
 package main.mk7024.Task;
 
+import main.mk7024.Duel;
+import main.mk7024.Player.PlayerState;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -12,8 +14,12 @@ public class WaitingTitle extends BukkitRunnable {
     }
     @Override
     public void run(){
-        player.sendTitle(ChatColor.translateAlternateColorCodes('&',"&a&l游戏等待中"),ChatColor.AQUA + getSymbol(i),0,40,0);
-        i++;
+        if(PlayerState.canJoin(Duel.getPlayerManager().getOnlineplayer().get(player.getUniqueId()))){
+            player.sendTitle(ChatColor.translateAlternateColorCodes('&',"&a&l游戏等待中"),ChatColor.AQUA + getSymbol(i),0,40,0);
+            i++;
+        }else{
+            cancel();
+        }
     }
 
     public String getSymbol(int m){
