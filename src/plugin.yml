@@ -1,0 +1,9 @@
+name: PixelDuel
+main: main.mk7024.Duel
+author: 7024w
+version: 1.0.0
+commands:
+  duel:
+    description: Duel a player.
+  queue:
+    description: Random a player to duel.
