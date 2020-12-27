@@ -14,7 +14,7 @@ public class WaitingTitle extends BukkitRunnable {
     }
     @Override
     public void run(){
-        if(PlayerState.canJoin(Duel.getPlayerManager().getState(player))){
+        if(PlayerState.canJoin(player)){
             player.sendTitle(ChatColor.translateAlternateColorCodes('&',"&a&l游戏等待中"),ChatColor.AQUA + getSymbol(i),0,40,0);
             i++;
         }else{
