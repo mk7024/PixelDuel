@@ -20,7 +20,7 @@ public class PlayerQuit implements Listener {
     public void onQuit(PlayerQuitEvent e){
         e.setQuitMessage(null);
         Player player = e.getPlayer();
-
+        Duel.getPlayerManager().removePlayer(player);
 
         //等待开始,对战时退出
         if(!PlayerState.canJoin(player)){
@@ -45,6 +45,6 @@ public class PlayerQuit implements Listener {
             Duel.getLobby().removeFromQueue(player);
             return;
         }
-        Duel.getPlayerManager().removePlayer(player);
+
     }
 }
