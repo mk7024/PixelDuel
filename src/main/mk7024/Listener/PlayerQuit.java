@@ -20,8 +20,6 @@ public class PlayerQuit implements Listener {
     public void onQuit(PlayerQuitEvent e){
         e.setQuitMessage(null);
         Player player = e.getPlayer();
-        Duel.getPlayerManager().removePlayer(player);
-
         //等待开始,对战时退出
         if(!PlayerState.canJoin(player)){
             Game game = Duel.getGameManager().getPlayerInWhichGame(player);
@@ -37,14 +35,14 @@ public class PlayerQuit implements Listener {
                     }
                 }
             }
-            return;
         }
         //队列中退出
         if(Duel.getLobby().getQueue().contains(player.getUniqueId())){
             BukkitTask queuetask = Duel.getLobby().getTaskid().get(player.getUniqueId());
             Duel.getLobby().removeFromQueue(player);
-            return;
         }
 
+
+        Duel.getPlayerManager().removePlayer(player);
     }
 }

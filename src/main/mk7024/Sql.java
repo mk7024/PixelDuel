@@ -68,8 +68,9 @@ public class Sql {
         }
     }
 
-    public void setData(String name, String type, int value) {
-        String update = "update stats set " + type + " = " + value + " where stats.name= '" + name + "'";
+    public void setData(String name, String type) {
+        String update = "UPDATE `stats` SET `" + type + "` = " + type + " + '1'" + " WHERE `stats`.`name`= '" + name + "'";
+        System.out.println(update);
         try {
             preparedStatement = connection.prepareStatement(update);
             preparedStatement.execute();

@@ -23,6 +23,7 @@ public class PlayerJoin implements Listener {
             }
         }
         Kit.setLobbyItem(player);
+
         e.setJoinMessage(null);
         Duel.getPlayerManager().addPlayer(player);
         Duel.getLobby().teleportToLobby(player);

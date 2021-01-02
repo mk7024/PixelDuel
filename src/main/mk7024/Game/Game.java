@@ -89,6 +89,8 @@ public class Game {
         Duel.getLobby().teleportToLobby(p);
         Duel.getPlayerManager().setInLobby(p);
         Kit.setLobbyItem(p);
+        Duel.getSql().setData(p.getName(),"kills");
+        Duel.getSql().setData(p.getName(),"gameplay");
         p.sendTitle(ChatColor.RED + "恭喜你,获胜!",null,10,30,10);
         player.clear();
         p.setHealth(20.0);
