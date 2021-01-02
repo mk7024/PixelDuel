@@ -12,8 +12,11 @@ public class WaitingTitle extends BukkitRunnable {
     public WaitingTitle(Player player){
         this.player = player;
     }
+
     @Override
     public void run(){
+        if(player == null || !player.isOnline())
+            cancel();
         if(PlayerState.canJoin(player)){
             player.sendTitle(ChatColor.translateAlternateColorCodes('&',"&a&l游戏等待中"),ChatColor.AQUA + getSymbol(i),0,40,0);
             i++;

@@ -7,3 +7,5 @@ commands:
     description: Duel a player.
   queue:
     description: Random a player to duel.
+  stats:
+    description: Show player's stats.

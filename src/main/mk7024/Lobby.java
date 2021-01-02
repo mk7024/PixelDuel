@@ -1,24 +1,56 @@
 package main.mk7024;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public class Lobby {
-    private static HashSet<UUID> queue = new HashSet<>();
+    private static ArrayList<UUID> queue = new ArrayList<>();
+    private static HashMap<UUID,BukkitTask> taskid = new HashMap<>();
+    private static Duel duel;
+    private static Location lobbylocation;
+    public Lobby(){
+        duel = Duel.getPlugin();
+        lobbylocation = new Location(Bukkit.getWorld("world"), duel.getConfig().getDouble("Lobby.location.x"), duel.getConfig().getDouble("Lobby.location.y"), duel.getConfig().getDouble("Lobby.location.z"));
 
-    public static HashSet<UUID> getQueue() {
+    }
+
+    public void teleportToLobby(Player player){
+        new BukkitRunnable(){
+            @Override
+            public void run(){
+                Chunk chunk = lobbylocation.getChunk();
+                if(!chunk.isLoaded()){
+                    chunk.load();
+                }
+                player.teleport(lobbylocation);
+                cancel();
+            }
+        }.runTaskLaterAsynchronously(duel,2);
+    }
+
+    public HashMap<UUID, BukkitTask> getTaskid() {
+        return taskid;
+    }
+
+    public List<UUID> getQueue() {
         return queue;
     }
-    public static void addToQueue(Player p) {
+    public void addToQueue(Player p) {
         queue.add(p.getUniqueId());
     }
-    public static void removeFromQueue(Player p){
+    public void removeFromQueue(Player p){
         queue.remove(p.getUniqueId());
     }
-    public static void clearQueue(){
+    public boolean isInQueue(Player player){
+        return queue.contains(player.getUniqueId());
+    }
+    public void clearQueue(){
         queue.clear();
     }
 }

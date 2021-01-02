@@ -11,6 +11,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 
 public class queue implements CommandExecutor {
@@ -20,7 +21,7 @@ public class queue implements CommandExecutor {
         }
         Player player = (Player) sender;
         if(command.getName().equalsIgnoreCase("queue")){
-            if(!PlayerState.canJoin(player)){
+            if(!PlayerState.notInGame(player)){
                 player.sendMessage(ChatColor.RED + "你已经加入游戏了!");
                 return true;
             }
@@ -30,8 +31,9 @@ public class queue implements CommandExecutor {
             }
             CheckingQueue.checkQueue();
             BukkitRunnable waitingTitle = new WaitingTitle(player);
-            waitingTitle.runTaskTimer(Duel.getPlugin(),0,20);
-            Lobby.addToQueue(player);
+            BukkitTask taskid = waitingTitle.runTaskTimer(Duel.getPlugin(),0,20);
+            Duel.getLobby().getTaskid().put(player.getUniqueId(),taskid);
+            Duel.getLobby().addToQueue(player);
             return true;
         }
         return false;

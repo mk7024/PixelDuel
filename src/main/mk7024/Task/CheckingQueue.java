@@ -6,6 +6,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.UUID;
+
 public class CheckingQueue extends BukkitRunnable {
     @Override
     public void run(){
@@ -13,12 +15,16 @@ public class CheckingQueue extends BukkitRunnable {
     }
 
     public static void checkQueue(){
-        if(Lobby.getQueue().size() == 2){
-            for(Player player : Bukkit.getOnlinePlayers()){
-                if(Lobby.getQueue().contains(player.getUniqueId())){
-                    Duel.getGameManager().startAGame(Lobby.getQueue());
-                }
+//        int count = 0;
+        if(Duel.getLobby().getQueue().size() >= 2){
+            Duel.getGameManager().startingAGame();
+//            for(Player player : Bukkit.getOnlinePlayers()){
+//                if(Lobby.getQueue().get(0).equals(player.getUniqueId()) || Lobby.getQueue().get(1).equals(player.getUniqueId())){
+//                    Duel.getGameManager().startingAGame();
+//                }
+//                for(UUID uuid : Lobby.getQueue()){
+//                    Duel.getGameManager().startingAGame();
+//                }
             }
         }
     }
-}
