@@ -4,6 +4,7 @@ import com.sun.org.apache.bcel.internal.ExceptionConst;
 import org.bukkit.entity.Player;
 
 import java.sql.*;
+import java.util.UUID;
 
 public class Sql {
     private Connection connection;
@@ -13,7 +14,7 @@ public class Sql {
     private String passwd = Duel.getPlugin().getConfig().getString("Mysql.passwd");
     private String sql = "jdbc:mysql://" + ip + ":3306/" + database +"?user=" + username + "&password=" + passwd +"&autoReconnect=true";
     private PreparedStatement preparedStatement = null;
-    private String insert = "CREATE TABLE IF NOT EXISTS `stats` ( `name` VARCHAR(20) NOT NULL , `kills` INT(11) NOT NULL DEFAULT '0', `death` INT(11) NOT NULL DEFAULT '0' , `gameplay` INT(11) NOT NULL DEFAULT '0',PRIMARY KEY(`name`))";
+    private String insert = "CREATE TABLE IF NOT EXISTS `stats` ( `uuid` VARCHAR(20) NOT NULL , `kills` INT(11) NOT NULL DEFAULT '0', `death` INT(11) NOT NULL DEFAULT '0' , `gameplay` INT(11) NOT NULL DEFAULT '0',PRIMARY KEY(`uuid`))";
 
 
     public void establishConnection() {
@@ -55,8 +56,8 @@ public class Sql {
         }
     }
 
-    public void addData(String name) {
-        String sql1 = "INSERT INTO stats (`name`,`kills`,`death`,`gameplay`) VALUES ('" + name + "',0,0,0)";
+    public void addData(UUID uuid) {
+        String sql1 = "INSERT INTO stats (`uuid`,`kills`,`death`,`gameplay`) VALUES ('" + uuid + "',0,0,0)";
         System.out.println(sql1);
         try {
             preparedStatement = connection.prepareStatement(sql1);
@@ -68,8 +69,8 @@ public class Sql {
         }
     }
 
-    public void setData(String name, String type) {
-        String update = "UPDATE `stats` SET `" + type + "` = " + type + " + '1'" + " WHERE `stats`.`name`= '" + name + "'";
+    public void setData(UUID uuid, String type) {
+        String update = "UPDATE `stats` SET `" + type + "` = " + type + " + '1'" + " WHERE `stats`.`uuid`= '" + uuid + "'";
         System.out.println(update);
         try {
             preparedStatement = connection.prepareStatement(update);
@@ -81,7 +82,7 @@ public class Sql {
     }
 
     public boolean isInDataBase(Player player) {
-        String sql = "SELECT * FROM `stats` WHERE `name`=" + "'" + player.getName() + "' LIMIT 1";
+        String sql = "SELECT * FROM `stats` WHERE `uuid`=" + "'" + player.getUniqueId() + "' LIMIT 1";
         try {
             preparedStatement = connection.prepareStatement(sql);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -95,12 +96,12 @@ public class Sql {
         return false;
     }
 
-    public int getData(String name, String type) {
+    public int getData(UUID uuid, String type) {
         int data = -1;
-        String sql = "SELECT `" + type + "` FROM `stats` WHERE `name`=? LIMIT 1";
+        String sql = "SELECT `" + type + "` FROM `stats` WHERE `uuid`=? LIMIT 1";
         try {
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1,name);
+            preparedStatement.setString(1, String.valueOf(uuid));
             try(ResultSet resultSet = preparedStatement.executeQuery()){
                 while(resultSet.next()){
                     data = Integer.valueOf(resultSet.getString(type));

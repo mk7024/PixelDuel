@@ -19,7 +19,7 @@ public class PlayerJoin implements Listener {
         Player player = e.getPlayer();
         if(!player.hasPlayedBefore()){
             if(!Duel.getSql().isInDataBase(player)){
-                Duel.getSql().addData(player.getName());
+                Duel.getSql().addData(player.getUniqueId());
             }
         }
         Kit.setLobbyItem(player);
