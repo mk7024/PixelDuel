@@ -19,7 +19,7 @@ public class Kit {
         inventory[1] = new ItemStack(Material.FISHING_ROD);
         inventory[2] = new ItemStack(Material.BOW);
         for(int i = 3; i<=33;i++){
-            if(i == 7 || i == 8 || i==17 || i==16 || i==26||i==25||i==14){
+            if(i == 7 || i == 8 || i==17 || i==16 || i==26||i==25 || i==15){
                 i++;
             }
             inventory[i] = new ItemStack(Material.SPLASH_POTION);
@@ -30,10 +30,10 @@ public class Kit {
         inventory[7] = new ItemStack(Material.ENDER_PEARL);
         inventory[8] = new ItemStack(Material.GOLDEN_APPLE);
         inventory[17] = new ItemStack(Material.GOLDEN_APPLE);
-        inventory[16] = new ItemStack(Material.ARROW,15);
+        inventory[16] = new ItemStack(Material.ARROW,30);
+        inventory[15] = new ItemStack(Material.APPLE,15);
         inventory[26] = new ItemStack(Material.GOLDEN_APPLE);
         inventory[25] = new ItemStack(Material.ENDER_PEARL);
-        inventory[14] = new ItemStack(Material.ENDER_PEARL);
         inventory[35] = new ItemStack(Material.GOLDEN_APPLE);
         inventory[34] = new ItemStack(Material.ENDER_PEARL);
         backpack[0] = new ItemStack(Material.IRON_BOOTS);
