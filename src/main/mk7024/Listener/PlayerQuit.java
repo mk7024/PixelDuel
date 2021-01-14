@@ -30,6 +30,7 @@ public class PlayerQuit implements Listener {
                         game.cancelStartingtask();
                         Duel.getPlayerManager().setInLobby(p);
                         Duel.getLobby().teleportToLobby(p);
+                        player.getInventory().clear();
                         p.sendTitle(ChatColor.RED + "对方退出游戏!",null,10,30,10);
                         game.setInLobby();
                     }

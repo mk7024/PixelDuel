@@ -17,6 +17,7 @@ public class PlayerJoin implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
         Player player = e.getPlayer();
+        player.setExp(0);
         if(!player.hasPlayedBefore()){
             if(!Duel.getSql().isInDataBase(player)){
                 Duel.getSql().addData(player.getUniqueId());

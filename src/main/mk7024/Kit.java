@@ -17,23 +17,25 @@ public class Kit {
         ItemStack[] backpack = new ItemStack[4];
         inventory[0] = new ItemStack(Material.DIAMOND_SWORD);
         inventory[1] = new ItemStack(Material.FISHING_ROD);
-        for(int i = 2; i<=34;i++){
-            if(i==8 || i==17 || i== 26){
+        inventory[2] = new ItemStack(Material.BOW);
+        for(int i = 3; i<=33;i++){
+            if(i == 7 || i == 8 || i==17 || i==16 || i==26||i==25||i==14){
                 i++;
             }
-            if(i%2==0){
-                inventory[i] = new ItemStack(Material.SPLASH_POTION);
-            }else{
-                inventory[i] = new ItemStack(Material.POTION);
-            }
+            inventory[i] = new ItemStack(Material.SPLASH_POTION);
             PotionMeta meta = (PotionMeta) inventory[i].getItemMeta();
             meta.addCustomEffect(new PotionEffect(PotionEffectType.HEAL,0,1),true);
             inventory[i].setItemMeta(meta);
         }
+        inventory[7] = new ItemStack(Material.ENDER_PEARL);
         inventory[8] = new ItemStack(Material.GOLDEN_APPLE);
         inventory[17] = new ItemStack(Material.GOLDEN_APPLE);
+        inventory[16] = new ItemStack(Material.ARROW,15);
         inventory[26] = new ItemStack(Material.GOLDEN_APPLE);
+        inventory[25] = new ItemStack(Material.ENDER_PEARL);
+        inventory[14] = new ItemStack(Material.ENDER_PEARL);
         inventory[35] = new ItemStack(Material.GOLDEN_APPLE);
+        inventory[34] = new ItemStack(Material.ENDER_PEARL);
         backpack[0] = new ItemStack(Material.IRON_BOOTS);
         backpack[1] = new ItemStack(Material.IRON_LEGGINGS);
         backpack[2] = new ItemStack(Material.IRON_CHESTPLATE);
