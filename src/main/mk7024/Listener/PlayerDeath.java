@@ -25,6 +25,8 @@ public class PlayerDeath implements Listener {
                 game.removePlayer(deader);
                 Duel.getSql().setData(deader.getName(),"death");
                 Duel.getSql().setData(deader.getName(),"gameplay");
+                Duel.getPlayerManager().getGamePlayer(deader).refreshData();
+                Duel.getPlayerManager().getGamePlayer((Player) killer).refreshData();
                 Kit.setLobbyItem(deader);
             }
         }
