@@ -35,6 +35,7 @@ public class Duel extends JavaPlugin {
         if (config != null) {
             for (String key : config.getKeys(false)) {
                 try {
+                    System.out.println(key);
                     Game game = new Game(key);
                     gameManager.getAllgame().add(game);
                 } catch (Exception error) {

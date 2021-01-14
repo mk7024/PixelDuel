@@ -16,6 +16,9 @@ public class PlayerInLobby implements Listener {
     @EventHandler
     public void onInvClick(InventoryClickEvent event){
         if(event.getWhoClicked() instanceof Player){
+            if(event.getWhoClicked().isOp()){
+                return;
+            }
             if(PlayerState.notInGame((Player) event.getWhoClicked())){
                 event.setCancelled(true);
             }
@@ -33,6 +36,9 @@ public class PlayerInLobby implements Listener {
 
     @EventHandler
     public void onInteract(PlayerInteractEvent event){
+        if(event.getPlayer().isOp()){
+            return;
+        }
         if(PlayerState.notInGame(event.getPlayer())){
             event.setCancelled(true);
         }

@@ -28,7 +28,7 @@ public class PlayerManager {
 
     public GamePlayer getGamePlayer(Player player){
         for(GamePlayer gameplayer : allplayer){
-            if(gameplayer.getName().equalsIgnoreCase(player.getName())){
+            if(gameplayer.getUUID().equals(player.getUniqueId())){
                 return gameplayer;
             }
         }

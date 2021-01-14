@@ -14,7 +14,7 @@ public class Sql {
     private String passwd = Duel.getPlugin().getConfig().getString("Mysql.passwd");
     private String sql = "jdbc:mysql://" + ip + ":3306/" + database +"?user=" + username + "&password=" + passwd +"&autoReconnect=true";
     private PreparedStatement preparedStatement = null;
-    private String insert = "CREATE TABLE IF NOT EXISTS `stats` ( `uuid` VARCHAR(20) NOT NULL , `kills` INT(11) NOT NULL DEFAULT '0', `death` INT(11) NOT NULL DEFAULT '0' , `gameplay` INT(11) NOT NULL DEFAULT '0',PRIMARY KEY(`uuid`))";
+    private String insert = "CREATE TABLE IF NOT EXISTS `stats` ( `uuid` VARCHAR(255) NOT NULL , `kills` INT(11) NOT NULL DEFAULT '0', `death` INT(11) NOT NULL DEFAULT '0' , `gameplay` INT(11) NOT NULL DEFAULT '0',PRIMARY KEY(`uuid`))";
 
 
     public void establishConnection() {

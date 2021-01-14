@@ -8,11 +8,17 @@ import org.bukkit.event.block.BlockPlaceEvent;
 public class Block implements Listener {
     @EventHandler
     public void onBreak(BlockBreakEvent event){
+        if(event.getPlayer().isOp()){
+            return;
+        }
         event.setCancelled(true);
     }
 
     @EventHandler
     public void onPlace(BlockPlaceEvent event){
+        if(event.getPlayer().isOp()){
+            return;
+        }
         event.setCancelled(true);
     }
 }

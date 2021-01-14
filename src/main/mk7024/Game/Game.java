@@ -3,10 +3,7 @@ package main.mk7024.Game;
 import main.mk7024.Duel;
 import main.mk7024.Kit;
 import main.mk7024.Lobby;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -29,11 +26,13 @@ public class Game {
 
     public Game(String name){
         this.name = name;
+        new WorldCreator(name).createWorld();
         w = Bukkit.getWorld(name);
+        w.setGameRuleValue("announceAdvancement","false");
         this.gameState = GameState.INLOBBY;
         duel = Duel.getPlugin();
-        location1 = new Location(w,duel.getConfig().getDouble("Game." + name + ".spawnlocation.x1"),duel.getConfig().getDouble("Game." + name + ".spawnlocation.y1"),duel.getConfig().getDouble("Game." + name + ".spawnlocation.z1"));
-        location2 = new Location(w,duel.getConfig().getDouble("Game." + name + ".spawnlocation.x2"),duel.getConfig().getDouble("Game." + name + ".spawnlocation.y2"),duel.getConfig().getDouble("Game." + name + ".spawnlocation.z2"));
+        location1 = new Location(w,duel.getConfig().getDouble("Game." + name + ".spawnlocation.x1"),duel.getConfig().getDouble("Game." + name + ".spawnlocation.y1"),duel.getConfig().getDouble("Game." + name + ".spawnlocation.z1"),duel.getConfig().getInt("Game." + name + ".spawnlocation.yaw1"),duel.getConfig().getInt("Game." + name + ".spawnlocation.pitch1"));
+        location2 = new Location(w,duel.getConfig().getDouble("Game." + name + ".spawnlocation.x2"),duel.getConfig().getDouble("Game." + name + ".spawnlocation.y2"),duel.getConfig().getDouble("Game." + name + ".spawnlocation.z2"),duel.getConfig().getInt("Game." + name + ".spawnlocation.yaw2"),duel.getConfig().getInt("Game." + name + ".spawnlocation.pitch2"));
     }
 
     public List<UUID> getPlayer() {
@@ -66,10 +65,6 @@ public class Game {
 
     public void removePlayer(Player p){
         player.remove(p.getUniqueId());
-    }
-
-    public void removeAllPlayer(){
-        player.clear();
     }
 
     public Location getLocation1(){

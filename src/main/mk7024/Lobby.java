@@ -4,7 +4,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.*;
@@ -16,22 +18,19 @@ public class Lobby {
     private static Location lobbylocation;
     public Lobby(){
         duel = Duel.getPlugin();
-        lobbylocation = new Location(Bukkit.getWorld("world"), duel.getConfig().getDouble("Lobby.location.x"), duel.getConfig().getDouble("Lobby.location.y"), duel.getConfig().getDouble("Lobby.location.z"));
-
+        lobbylocation = new Location(Bukkit.getWorld("world"), duel.getConfig().getDouble("Lobby.location.x"), duel.getConfig().getDouble("Lobby.location.y"), duel.getConfig().getDouble("Lobby.location.z"),duel.getConfig().getInt("Lobby.location.yaw"),duel.getConfig().getInt("Lobby.location.pitch"));
     }
 
     public void teleportToLobby(Player player){
-        new BukkitRunnable(){
-            @Override
+        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(duel, new Runnable() {
             public void run(){
                 Chunk chunk = lobbylocation.getChunk();
                 if(!chunk.isLoaded()){
                     chunk.load();
                 }
                 player.teleport(lobbylocation);
-                cancel();
             }
-        }.runTaskLaterAsynchronously(duel,2);
+        }, 2);
     }
 
     public HashMap<UUID, BukkitTask> getTaskid() {

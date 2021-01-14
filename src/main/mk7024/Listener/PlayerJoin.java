@@ -23,10 +23,17 @@ public class PlayerJoin implements Listener {
             }
         }
         Kit.setLobbyItem(player);
-
-        e.setJoinMessage(null);
+        sendJoinMessage(player);
+        e.setJoinMessage(ChatColor.translateAlternateColorCodes('&',"&6[&2+&6] &9"+ player.getName() + "&6加入了对决."));
         Duel.getPlayerManager().addPlayer(player);
         Duel.getLobby().teleportToLobby(player);
     }
 
+
+    public void sendJoinMessage(Player player){
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&7=====&r&a&l欢迎来到像素对决&r&7====="));
+        player.sendMessage(ChatColor.RED + "输入/queue随机匹配一位队友");
+        player.sendMessage(ChatColor.RED + "输入/stats查看战绩");
+        player.sendMessage(ChatColor.RED + ChatColor.translateAlternateColorCodes('&',"&7=====&r&a&l欢迎加入网易国服群:xxx&r&7====="));
+    }
 }
