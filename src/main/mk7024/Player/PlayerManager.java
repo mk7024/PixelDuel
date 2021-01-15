@@ -3,6 +3,7 @@ package main.mk7024.Player;
 import it.unimi.dsi.fastutil.Hash;
 import main.mk7024.Duel;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.*;
@@ -28,10 +29,8 @@ public class PlayerManager {
     }
 
     public void removeEffect(Player player){
-        for (PotionEffectType p : PotionEffectType.values()) {
-            if (player.hasPotionEffect(p)) {
-                player.removePotionEffect(p);
-            }
+        for (PotionEffect p : player.getActivePotionEffects()) {
+                player.removePotionEffect(p.getType());
         }
     }
 

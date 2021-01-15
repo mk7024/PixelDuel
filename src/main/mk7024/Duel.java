@@ -59,6 +59,7 @@ public class Duel extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new ItemSpawn(), this);
         sql.establishConnection();
         sql.insertSQL();
+        sql.disConnect();
     }
 
     @Override

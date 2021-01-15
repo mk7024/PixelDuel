@@ -60,8 +60,10 @@ public class Sql {
         String sql1 = "INSERT INTO stats (`uuid`,`kills`,`death`,`gameplay`) VALUES ('" + uuid + "',0,0,0)";
         System.out.println(sql1);
         try {
+            establishConnection();
             preparedStatement = connection.prepareStatement(sql1);
             preparedStatement.executeUpdate();
+            disConnect();
 
         } catch (SQLException sqle) {
             System.out.println("更新数据出错");
@@ -73,8 +75,10 @@ public class Sql {
         String update = "UPDATE `stats` SET `" + type + "` = " + type + " + '1'" + " WHERE `stats`.`uuid`= '" + uuid + "'";
         System.out.println(update);
         try {
+            establishConnection();
             preparedStatement = connection.prepareStatement(update);
             preparedStatement.execute();
+            disConnect();
         } catch (SQLException sqle) {
             System.out.println("更新数据出错");
             sqle.printStackTrace();
@@ -84,12 +88,14 @@ public class Sql {
     public boolean isInDataBase(Player player) {
         String sql = "SELECT * FROM `stats` WHERE `uuid`=" + "'" + player.getUniqueId() + "' LIMIT 1";
         try {
+            establishConnection();
             preparedStatement = connection.prepareStatement(sql);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     return true;
                 }
             }
+            disConnect();
         } catch (SQLException sqle) {
             sqle.printStackTrace();
         }
@@ -100,6 +106,7 @@ public class Sql {
         int data = -1;
         String sql = "SELECT `" + type + "` FROM `stats` WHERE `uuid`=? LIMIT 1";
         try {
+            establishConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, String.valueOf(uuid));
             try(ResultSet resultSet = preparedStatement.executeQuery()){
@@ -107,6 +114,7 @@ public class Sql {
                     data = Integer.valueOf(resultSet.getString(type));
                 }
             }
+            disConnect();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
 
